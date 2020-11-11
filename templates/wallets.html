@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% import "macros.jinja" as macros %}
+
+{% block title %}Wallets{% endblock %}
+{% block style -%}
+table {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+tr > * {
+    padding: 2px 10px;
+}
+
+td.address {
+    word-break: break-all
+}
+{%- endblock %}
+
+{% block content -%}
+    {% call macros.box() -%}
+        <h1>Wallets</h1>
+        <form method="post">
+            <input type="hidden" name="hide" value="{{ (hide+1)%2 }}">
+            <button type="submit">{{ "Show" if hide != 0 else "Hide" }} empty wallets</button>
+        </form>
+        <h3>T-Addr</h3>
+        <table>
+            {% if tw -%}
+                {% for w in tw -%}
+                <tr>
+                    <td class="address">{{ w.address }}</td>
+                    <td>{{ w.amount }} SAFE</td>
+                </tr>
+                {%- endfor %}
+            {%- else %}
+                <p>No wallets to show</p>
+            {%- endif %}
+        </table>
+        <form action="/wallets/new">
+            <button type="submit">Create new wallet</button>
+        </form>
+
+        <h3>Z-Addr</h3>
+        <table>
+            {% if zw -%}
+                {% for w in zw -%}
+                <tr>
+                    <td class="address">{{ w.address }}</td>
+                    <td>{{ w.amount }} SAFE</td>
+                </tr>
+                {%- endfor %}
+            {%- else %}
+                <p>No wallets to show</p>
+            {%- endif %}
+        </table>
+        <form action="/wallets/znew">
+            <button type="submit">Create new zwallet</button>
+        </form>
+    {%- endcall %}
+{%- endblock %}

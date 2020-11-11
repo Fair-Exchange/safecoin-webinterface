@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% import "macros.jinja" as macros %}
+
+{% block title %}Login{% endblock %}
+
+{% block style %}
+    div { padding: 30px !important; }
+    div img, form > * { margin: 10px }
+{% endblock %}
+
+{% block content %}
+    {% call macros.box() %}
+        <form style="border-radius: 5px; display: flex; flex-direction:column; align-items:center;" method="POST">
+            <input type="text" name="username" id="username" placeholder="Username">
+            <input type="password" name="password" id="password" placeholder="Password">
+            <!-- <input type="checkbox" name="remind_me" id="remind_me" value="Remind Me"> -->
+            {% if error %}
+                <p style="color:red">Invalid username or password.</p>
+            {% endif %}
+            <input type="submit" value="Login">
+        </form>
+    {% endcall %}
+{% endblock %}

@@ -1,0 +1,6 @@
+{% macro box() -%}
+<div style="margin: 20px; background-color: white; border-radius: 4px; padding:20px 40px; max-width: 80%; display: flex; flex-direction: column; align-items: center;">
+    <a href="/"><img src="{{ url_for('static', filename='images/SafeCoin-Logo-with-text.png') }}" alt="" style="width: 250px"></a>
+    {{ caller() }}
+</div>
+{%- endmacro %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Loading{% endblock %}
+
+{% block style %}
+    @import url({{ url_for('static', filename='css/animation.css') }});
+
+    html, body {
+        height: 100%;
+    }
+    img {
+        width: 70%;
+        height: 70%;
+        object-fit: contain;
+    }
+    h1 {
+        font-family: 'Arial Black', Gadget, sans-serif;
+        color: white;
+    }
+{% endblock %}
+
+{% block content %}
+    <img class="rotate" src="{{ url_for('static', filename='images/Safecoin_Logo_White_Fill.png') }}" alt="Logo">
+    <h1>{{ message }}</h1>
+{% endblock %}

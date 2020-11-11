@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  safecoin:
+    image: safecoin/safecoin
+    command: -rpcallowip=0.0.0.0/0
+    volumes:
+      - safecoin-data:/safecoin
+    restart: unless-stopped
+    stop_grace_period: 2m
+  webinterface:
+    build: .
+    # depends_on:
+    #   - safecoin
+    environment:                  # testing
+      - FLASK_DEBUG=1             # testing
+    ports:
+      - "5000:5000"
+    volumes:
+      - safecoin-data:/safecoin
+    stop_signal: SIGINT           # testing
+    restart: unless-stopped
+
+volumes:
+  safecoin-data:

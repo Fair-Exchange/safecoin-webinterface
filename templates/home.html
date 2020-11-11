@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% import "macros.jinja" as macros %}
+
+{% block title %}Home{% endblock %}
+{% block style -%}
+.box {
+    padding: 10px 20px;
+    border-radius: 4px;
+    margin: 10px;
+    flex-grow: 1;
+    color: white;
+    text-decoration: none;
+    background-color: blue;
+}
+
+.netinfo {
+    display: flex;
+    width: calc(100% + 80px);
+    margin-bottom: -20px;
+    margin-top: 20px;
+}
+
+.netinfo > * {
+    flex-grow: 1;
+    text-align: center;
+    padding: 5px 0;
+}
+.netinfo :first-child {
+    border-bottom-left-radius: 4px;
+}
+.netinfo :last-child {
+    border-bottom-right-radius: 4px;
+}
+.netinfo :not(:last-child) {
+    border-right: 2px solid black;
+}
+{%- endblock %}
+
+{% block content -%}
+    {% call macros.box() -%}
+    <div style="display: flex; flex-wrap: wrap;">
+        <div class="box" style="background-color: {{ 'green' if info.synced else 'red' }};">
+            <span>BLOCKS</span>
+            <h1>{{ info.blocks }}</h1>
+            <span>Connections: {{ info.connections }}</span>
+        </div>
+        <div class="box">
+            <span>NET HASHRATE</span>
+            <h1>{{ hr }}</h1>
+        </div>
+        <a href="/wallets" class="box">
+            <span>BALANCE</span>
+            <h1>{{ info.balance }} {{ info.name }}</h1>
+            <span>Z-Balance: {{ info.balance }} {{ info.name }}</span>
+        </a>
+    </div>
+    <div class="netinfo">
+        {% for net in netinfo.networks -%}
+        <span style="background-color: {{ 'crimson' if not net.reachable else 'yellow' if net.limited else 'green'}};">{{ net.name }}</span>
+        {%- endfor %}
+    </div>
+    {%- endcall %}
+{%- endblock %}

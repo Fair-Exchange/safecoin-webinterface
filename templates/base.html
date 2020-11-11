@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if refresh %}
+    <meta http-equiv="refresh" content="6">
+    {% endif %}
+    <title>{% block title %}{% endblock %} - SafeCoin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css')">
+    <style>{% block style %}{% endblock %}</style>
+    <!-- Safecoin font: ITC Eras Demi: https://www.onlinewebfonts.com/download/457055c70a9c98aa64002f05d6652edc -->
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>
